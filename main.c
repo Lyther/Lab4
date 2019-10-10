@@ -3,6 +3,7 @@
 #include "sys.h"
 #include "usart.h"
 #include "key.h"
+#include <string.h>
 
 int main(void) {	
 	u8 t;
@@ -35,13 +36,13 @@ int main(void) {
 			len = USART_RX_STA & 0x3fff;
 			USART_RX_BUF[len] = '\0';
 			if (strcmp("led0 on", USART_RX_BUF) == 0)
-				GPIO_ResetBits(FPIOA, GPIO_Pin_8);
+				GPIO_ResetBits(GPIOA, GPIO_Pin_8);
 			else if (strcmp("led0 off", USART_RX_BUF) == 0)
-				GPIO_SetBits(FPIOA, GPIO_Pin_8);
+				GPIO_SetBits(GPIOA, GPIO_Pin_8);
 			else if (strcmp("led1 on", USART_RX_BUF) == 0)
-				GPIO_ResetBits(FPIOD, GPIO_Pin_2);
+				GPIO_ResetBits(GPIOD, GPIO_Pin_2);
 			else if (strcmp("led1 off", USART_RX_BUF) == 0)
-				GPIO_SetBits(FPIOD, GPIO_Pin_2);
+				GPIO_SetBits(GPIOD, GPIO_Pin_2);
 			else {	//Display name and welcome message.
 				printf("\r\nHello, \r\n");
 				for (t=0; t<len; t++) {
